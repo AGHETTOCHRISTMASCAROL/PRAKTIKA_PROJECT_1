@@ -9,9 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Введите что-то"
         android:inputType="textPersonName"
-        android:text="" />
+        android:text=""/>
     <Button
+        android:id="@+id/startBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onclick"
