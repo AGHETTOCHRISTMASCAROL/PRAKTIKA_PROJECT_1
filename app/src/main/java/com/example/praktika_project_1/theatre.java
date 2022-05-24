@@ -11,8 +11,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import org.w3c.dom.Text;
+import com.example.praktika_project_1.R;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -24,28 +25,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class theatre extends AppCompatActivity {
-
     TextView tvInfo;
     EditText tvName;
     theatre.MyTask mt;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theatre);
+        tvInfo = (TextView) findViewById(R.id.tvInfo);
+        tvName = (EditText) findViewById(R.id.editTextTextPersonName);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
-
     public void onclick(View v) {
         mt = new theatre.MyTask();
         mt.execute(tvName.getText().toString());
     }
+
 
     class MyTask extends AsyncTask<String, Void, ArrayList<String[]>> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             tvInfo.setText("Begin");
+            progressBar.setVisibility(View.VISIBLE);
         }
+        @Override
+        protected void onPostExecute(ArrayList<String[]> result) {
+            super.onPostExecute(result);
+            theatre.ClAdapter clAdapter=new
+                    theatre.ClAdapter(tvInfo.getContext(),result);
+            ListView lvMain = (ListView) findViewById(R.id.lvMain);
+            lvMain.setAdapter(clAdapter);
+            progressBar.setVisibility(View.INVISIBLE);
+            tvInfo.setText("Результат");
+        }
+
 
         @Override
         protected ArrayList<String[]> doInBackground(String... params) {
@@ -53,7 +69,7 @@ public class theatre extends AppCompatActivity {
             HttpURLConnection myConnection = null;
             try {
                 URL mySite = new
-                        URL("http://10.0.2.2:8080/json?id=1&name="+params[0]);
+                        URL("http://10.0.2.2:8080/kino?id=1&NAME=" + params[0]);
                 myConnection =
                         (HttpURLConnection) mySite.openConnection();
             } catch (MalformedURLException e) {
@@ -61,20 +77,21 @@ public class theatre extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            int i=0;
+
+            int i = 0;
             try {
                 i = myConnection.getResponseCode();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            if (i==200) {
-                InputStream responseBody=null;
+            if (i == 200) {
+                InputStream responseBody = null;
                 try {
                     responseBody = myConnection.getInputStream();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                InputStreamReader responseBodyReader =null;
+                InputStreamReader responseBodyReader = null;
                 try {
                     responseBodyReader =
                             new InputStreamReader(responseBody, "UTF-8");
@@ -89,8 +106,8 @@ public class theatre extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                String key=null;
-                String value =null;
+                String key = null;
+                String value = null;
                 while (true) {
                     try {
                         if (!jsonReader.hasNext()) break;
@@ -101,9 +118,10 @@ public class theatre extends AppCompatActivity {
                         jsonReader.beginObject();
                     } catch (IOException e) {
                         e.printStackTrace();
-                    };
-                    String[] str=new String[2];
-                    int n=0;
+                    }
+                    ;
+                    String[] str = new String[2];
+                    int n = 0;
                     while (true) {
                         try {
                             if (!jsonReader.hasNext()) break;
@@ -122,7 +140,7 @@ public class theatre extends AppCompatActivity {
                             e.printStackTrace();
                         }
 // sb.append("\r\n : " +value);
-                        str[n]=value;
+                        str[n] = value;
                         n++;
                     }
                     try {
@@ -140,19 +158,9 @@ public class theatre extends AppCompatActivity {
             }
             myConnection.disconnect();
             return res;
-        }
 
-        @Override
-        protected void onPostExecute(ArrayList<String[]> result) {
-            super.onPostExecute(result);
-            theatre.ClAdapter clAdapter=new
-                    theatre.ClAdapter(tvInfo.getContext(),result);
-            ListView lvMain = (ListView) findViewById(R.id.lvMain);
-            lvMain.setAdapter(clAdapter);
-            tvInfo.setText("End");
         }
     }
-
     class ClAdapter extends BaseAdapter {
         Context ctx;
         LayoutInflater lInflater;
