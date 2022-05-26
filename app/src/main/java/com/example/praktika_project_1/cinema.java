@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import com.example.praktika_project_1.R;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -24,40 +23,38 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class theatre extends AppCompatActivity {
+public class cinema extends AppCompatActivity {
     TextView tvInfo;
     EditText tvName;
-    theatre.MyTask mt;
+    MyTask mt3;
     ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_theatre);
+        setContentView(R.layout.activity_cinema);
         tvInfo = (TextView) findViewById(R.id.tvInfo);
         tvName = (EditText) findViewById(R.id.editTextTextPersonName);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
     public void onclick(View v) {
-        mt = new theatre.MyTask();
-        mt.execute(tvName.getText().toString());
+        mt3 = new cinema.MyTask();
+        mt3.execute(tvName.getText().toString());
     }
 
-    class MyTask extends AsyncTask<String, Void, ArrayList<String[]>> {
 
+    class MyTask extends AsyncTask<String, Void, ArrayList<String[]>> {
         @Override
-        protected void onPreExecute()
-        {
+        protected void onPreExecute() {
             super.onPreExecute();
             tvInfo.setText("Begin");
             progressBar.setVisibility(View.VISIBLE);
         }
-
         @Override
-        protected void onPostExecute(ArrayList<String[]> result)
-        {
+        protected void onPostExecute(ArrayList<String[]> result) {
             super.onPostExecute(result);
-            theatre.ClAdapter clAdapter=new theatre.ClAdapter(tvInfo.getContext(),result);
+            cinema.ClAdapter clAdapter=new
+                    cinema.ClAdapter(tvInfo.getContext(),result);
             ListView lvMain = (ListView) findViewById(R.id.lvMain);
             lvMain.setAdapter(clAdapter);
             progressBar.setVisibility(View.INVISIBLE);
@@ -65,192 +62,136 @@ public class theatre extends AppCompatActivity {
         }
 
         @Override
-        protected ArrayList<String[]> doInBackground(String... params)
-        {
+        protected ArrayList<String[]> doInBackground(String... params) {
             ArrayList<String[]> res = new ArrayList<>();
             HttpURLConnection myConnection = null;
-            try
-            {
-                URL mySite = new URL("http://10.0.2.2:8080/kino?id=1&NAME=" + params[0]);
-                myConnection = (HttpURLConnection) mySite.openConnection();
-            }
-            catch (MalformedURLException e)
-            {
+            try {
+                URL mySite = new
+                        URL("http://10.0.2.2:8080/kino?id=3" + params[0]);
+                myConnection =
+                        (HttpURLConnection) mySite.openConnection();
+            } catch (MalformedURLException e) {
                 e.printStackTrace();
-            }
-
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
             int i = 0;
-            try
-            {
+            try {
                 i = myConnection.getResponseCode();
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            if (i == 200)
-            {
+            if (i == 200) {
                 InputStream responseBody = null;
-                try
-                {
+                try {
                     responseBody = myConnection.getInputStream();
-                }
-                catch (IOException e)
-                {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
-
                 InputStreamReader responseBodyReader = null;
-                try
-                {
-                    responseBodyReader = new InputStreamReader(responseBody, "UTF-8");
-                }
-
-                catch (UnsupportedEncodingException e)
-                {
+                try {
+                    responseBodyReader =
+                            new InputStreamReader(responseBody, "UTF-8");
+                } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
-
                 JsonReader jsonReader;
                 jsonReader = null;
                 jsonReader = new JsonReader(responseBodyReader);
-                try
-                {
+                try {
                     jsonReader.beginArray();
-                }
-                catch (IOException e)
-                {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
-
                 String key = null;
                 String value = null;
-                while (true)
-                {
-                    try
-                    {
+                while (true) {
+                    try {
                         if (!jsonReader.hasNext()) break;
-                    }
-                    catch (IOException e)
-                    {
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    try
-                    {
+                    try {
                         jsonReader.beginObject();
-                    }
-                    catch (IOException e)
-                    {
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
-
+                    ;
                     String[] str = new String[2];
                     int n = 0;
-                    while (true)
-                    {
-                        try
-                        {
+                    while (true) {
+                        try {
                             if (!jsonReader.hasNext()) break;
-                        }
-                        catch (IOException e)
-                        {
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        try
-                        {
+                        try {
                             key = jsonReader.nextName();
-                        }
-                        catch (IOException e)
-                        {
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
-
-                        try
-                        {
+// sb.append("\r\n : " +key);
+                        try {
                             value = jsonReader.nextString();
-                        }
-                        catch (IOException e)
-                        {
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
-
+// sb.append("\r\n : " +value);
                         str[n] = value;
                         n++;
                     }
-                    try
-                    {
+                    try {
                         jsonReader.endObject();
-                    }
-                    catch (IOException e)
-                    {
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                     res.add(str);
                 }
-                try
-                {
+                try {
                     jsonReader.endArray();
-                }
-                catch (IOException e)
-                {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             myConnection.disconnect();
             return res;
+
         }
     }
-
-    class ClAdapter extends BaseAdapter
-    {
+    class ClAdapter extends BaseAdapter {
         Context ctx;
         LayoutInflater lInflater;
         List<String[]> lines;
-
-        ClAdapter(Context context, List<String[]> elines)
-        {
+        ClAdapter(Context context, List<String[]> elines){
             ctx = context;
             lines = elines;
             lInflater = (LayoutInflater) ctx
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
-
         @Override
-        public int getCount()
-        {
+        public int getCount() {
             return lines.size();
         }
-
         @Override
-        public Object getItem(int position)
-        {
+        public Object getItem(int position) {
             return lines.get(position);
         }
-
         @Override
-        public long getItemId(int position)
-        {
+        public long getItemId(int position) {
             return position;
         }
-
         @Override
         public View getView(int position, View convertView, ViewGroup parent)
         {
             View view = convertView;
-            if (view == null)
-            {
+            if (view == null) {
                 view = lInflater.inflate(R.layout.item, parent, false);
-            }
+            };
             String[] p =(String[]) getItem(position);
             ((TextView) view.findViewById(R.id.tvText)).setText(p[0]);
             ((TextView) view.findViewById(R.id.tvText1)).setText(p[1]);
             return view;
-        }
+        };
     }
 }

@@ -12,7 +12,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PRAKTIKA_PROJECT_1"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".newTheatre"
+            android:exported="false" />
+        <activity
+            android:name=".cinema"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".filmCinema"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".theatre"
             android:exported="false">
@@ -20,7 +36,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -30,7 +45,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

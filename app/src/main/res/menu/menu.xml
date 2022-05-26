@@ -6,4 +6,29 @@
         android:id="@+id/m1"
         android:title="Найти кинотеатры"
         android:visible="true"/>
+
+    <item
+        android:id="@+id/m2"
+        android:title="Показ фильма"
+        android:visible="true"/>
+
+    <item
+        android:id="@+id/m3"
+        android:title="Кинотеатры"
+        android:visible="true"/>
+
+    <item
+        android:id="@+id/m4"
+        android:title="Новый кинотеатр"
+        android:visible="true"/>
+
+    <item
+        android:id="@+id/m5"
+        android:title="Новый фильм"
+        android:visible="true"/>
+
+    <item
+        android:id="@+id/m6"
+        android:title="Новое соответсвие"
+        android:visible="true"/>
 </menu>

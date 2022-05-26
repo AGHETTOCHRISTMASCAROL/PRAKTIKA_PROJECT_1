@@ -5,6 +5,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="@color/dark">
+
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="match_parent"
@@ -13,7 +14,6 @@
         android:hint="Введите что-то"
         android:inputType="textPersonName"
         android:text=""/>
-
     <Button
         android:id="@+id/startBtn"
         android:layout_width="wrap_content"
