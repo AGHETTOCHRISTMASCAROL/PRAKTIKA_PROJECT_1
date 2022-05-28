@@ -23,25 +23,24 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class cinema extends AppCompatActivity {
+public class film extends AppCompatActivity {
     TextView tvInfo;
     EditText tvName;
-    MyTask mt3;
+    MyTask mt2;
     ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cinema);
+        setContentView(R.layout.activity_film_cinema);
         tvInfo = (TextView) findViewById(R.id.tvInfo);
         tvName = (EditText) findViewById(R.id.editTextTextPersonName);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
     public void onclick(View v) {
-        mt3 = new cinema.MyTask();
-        mt3.execute(tvName.getText().toString());
+        mt2 = new film.MyTask();
+        mt2.execute(tvName.getText().toString());
     }
-
 
     class MyTask extends AsyncTask<String, Void, ArrayList<String[]>> {
         @Override
@@ -50,11 +49,12 @@ public class cinema extends AppCompatActivity {
             tvInfo.setText("Begin");
             progressBar.setVisibility(View.VISIBLE);
         }
+
         @Override
         protected void onPostExecute(ArrayList<String[]> result) {
             super.onPostExecute(result);
-            cinema.ClAdapter clAdapter=new
-                    cinema.ClAdapter(tvInfo.getContext(),result);
+            film.ClAdapter clAdapter=new
+                    film.ClAdapter(tvInfo.getContext(),result);
             ListView lvMain = (ListView) findViewById(R.id.lvMain);
             lvMain.setAdapter(clAdapter);
             progressBar.setVisibility(View.INVISIBLE);
@@ -67,7 +67,7 @@ public class cinema extends AppCompatActivity {
             HttpURLConnection myConnection = null;
             try {
                 URL mySite = new
-                        URL("http://10.0.2.2:8080/kino?id=3" + params[0]);
+                        URL("http://10.0.2.2:8080/kino?id=2&NAME=" + params[0]);
                 myConnection =
                         (HttpURLConnection) mySite.openConnection();
             } catch (MalformedURLException e) {
@@ -159,6 +159,7 @@ public class cinema extends AppCompatActivity {
 
         }
     }
+
     class ClAdapter extends BaseAdapter {
         Context ctx;
         LayoutInflater lInflater;
@@ -191,6 +192,7 @@ public class cinema extends AppCompatActivity {
             String[] p =(String[]) getItem(position);
             ((TextView) view.findViewById(R.id.tvText)).setText(p[0]);
             ((TextView) view.findViewById(R.id.tvText1)).setText(p[1]);
+            ((TextView) view.findViewById(R.id.tvText2)).setText(p[2]);
             return view;
         };
     }

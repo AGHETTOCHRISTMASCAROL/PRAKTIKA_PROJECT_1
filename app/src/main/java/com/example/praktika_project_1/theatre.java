@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import com.example.praktika_project_1.R;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -71,7 +71,7 @@ public class theatre extends AppCompatActivity {
             HttpURLConnection myConnection = null;
             try
             {
-                URL mySite = new URL("http://10.0.2.2:8080/kino?id=1&NAME=" + params[0]);
+                URL mySite = new URL("http://10.0.2.2:8080/kino?id=2&NAME=" + params[0]);
                 myConnection = (HttpURLConnection) mySite.openConnection();
             }
             catch (MalformedURLException e)
@@ -217,8 +217,7 @@ public class theatre extends AppCompatActivity {
         {
             ctx = context;
             lines = elines;
-            lInflater = (LayoutInflater) ctx
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            lInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
         @Override

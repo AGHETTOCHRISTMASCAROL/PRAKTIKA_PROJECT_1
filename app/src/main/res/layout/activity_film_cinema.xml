@@ -1,37 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="@color/dark">
+    android:background="@color/white">
 
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:ems="10"
-        android:hint="Введите что-то"
         android:inputType="textPersonName"
-        android:text=""/>
-    <Button
-        android:id="@+id/startBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onclick"
-        android:text="@string/start"/>
+        android:text=""
+        android:background="@color/dark"
+        android:textColor="@color/white"
+        android:fontFamily="@font/montserrat_regular" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="horizontal"
+        android:background="@color/black">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:onClick="onclick"
+            android:text="@string/start" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="45dp"
+            android:layout_gravity="center_vertical"
+            android:visibility="invisible" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tvInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""/>
+        android:text=""
+        android:layout_gravity="center"
+        android:fontFamily="@font/montserrat_regular"/>
 
     <ListView
         android:id="@+id/lvMain"

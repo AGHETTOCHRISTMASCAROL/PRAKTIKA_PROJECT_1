@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">PRAKTIKA_PROJECT_1</string>
+    <string name="app_name">CHRONO</string>
     <string name="start">Start</string>
+    <string name="error">Вы ничего не ввели!</string>
 </resources>

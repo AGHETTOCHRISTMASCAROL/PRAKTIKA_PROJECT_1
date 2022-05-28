@@ -2,15 +2,11 @@ package com.example.praktika_project_1;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     TextView tvInfo;
@@ -40,9 +36,11 @@ public class MainActivity extends AppCompatActivity {
         {
             case R.id.m1: intent = new Intent(this, theatre.class);
                 break;
-            case R.id.m2: intent = new Intent(this, filmCinema.class);
+            case R.id.m2: intent = new Intent(this, searchFilm.class);
                 break;
-            case R.id.m3: intent = new Intent(this, cinema.class);
+            case R.id.m3: intent = new Intent(this, newTheatre.class);
+                break;
+            case R.id.m4: intent = new Intent(this, newFilm.class);
                 break;
             default:
                 return super.onOptionsItemSelected(item);
