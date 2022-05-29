@@ -36,6 +36,7 @@ import java.util.List;
 public class newfilm extends AppCompatActivity {
     TextView tvInfo;
     EditText tvName;
+    CheckBox cbMain;
     newfilm.MyTask mt;
     newfilm.MyTaskN mtn;
     newfilm.MyTaskTF mttf;
@@ -47,6 +48,7 @@ public class newfilm extends AppCompatActivity {
         setContentView(R.layout.activity_newfilm);
         tvInfo = (TextView) findViewById(R.id.tvInfo);
         tvName = (EditText) findViewById(R.id.editTextTextPersonName);
+        cbMain = (CheckBox) findViewById(R.id.checkBox);
         lvMain = (ListView) findViewById(R.id.lvMain);
         lvMain.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         mt = new newfilm.MyTask();
@@ -190,14 +192,12 @@ public class newfilm extends AppCompatActivity {
                     mttf.execute(st[1],result);
                 };
             }
-            tvInfo.setText("End");
         }
     }
     class MyTask extends AsyncTask<Void, Void, ArrayList<String[]> >{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            tvInfo.setText("Begin");
         }
 
         @Override
@@ -308,7 +308,6 @@ public class newfilm extends AppCompatActivity {
             newfilm.ClAdapter clAdapter=new newfilm.ClAdapter(tvInfo.getContext(),result);
 //            lvMain = (ListView) findViewById(R.id.lvMain);
             lvMain.setAdapter(clAdapter);
-            tvInfo.setText("End");
         }
 
     }

@@ -13,6 +13,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text=""
+        android:hint="|"
+        android:textColorHint="@color/white"
         android:background="@color/dark"
         android:textColor="@color/white"
         android:fontFamily="@font/montserrat_regular" />

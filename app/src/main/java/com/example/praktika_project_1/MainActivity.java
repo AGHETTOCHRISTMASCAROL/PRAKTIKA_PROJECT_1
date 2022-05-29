@@ -1,4 +1,4 @@
-package com.example.praktika_project_1;
+package com.example.praktika_project_1; //SAVRIKOV PR-20.101
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;

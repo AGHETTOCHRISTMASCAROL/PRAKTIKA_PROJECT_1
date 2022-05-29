@@ -13,6 +13,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text=""
+        android:hint="|"
+        android:textColorHint="@color/white"
         android:background="@color/dark"
         android:textColor="@color/white"
         android:fontFamily="@font/montserrat_regular" />
@@ -43,12 +45,12 @@
 
     <TextView
         android:id="@+id/tvInfo"
-        android:layout_width="wrap_content"
+        android:layout_width="1dp"
         android:layout_height="wrap_content"
-        android:text=""
         android:layout_gravity="center"
         android:fontFamily="@font/montserrat_regular"
-        android:textColor="@color/white"/>
+        android:text=""
+        android:textColor="@color/white" />
 
     <ListView
         android:id="@+id/lvMain"
