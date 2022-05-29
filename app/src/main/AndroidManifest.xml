@@ -13,6 +13,9 @@
         android:theme="@style/Theme.PRAKTIKA_PROJECT_1"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".newfilm"
+            android:exported="false" />
+        <activity
             android:name=".searchFilm"
             android:exported="false" />
         <activity
@@ -23,10 +26,10 @@
             android:exported="false" />
         <activity
             android:name=".film"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".theatre"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

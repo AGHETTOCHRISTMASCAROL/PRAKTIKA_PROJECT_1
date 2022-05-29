@@ -83,8 +83,6 @@ public class searchFilm extends AppCompatActivity {
 
                 return buffer.toString();
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
@@ -102,6 +100,7 @@ public class searchFilm extends AppCompatActivity {
             return null;
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         protected void onPostExecute(String result){
             super.onPostExecute(result);
